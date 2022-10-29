@@ -13,14 +13,14 @@ var fs = require('fs');
 var exercise = require('./exercise-one');
 var dirpath = path.join(__dirname, 'poem-one');
 var stanzas = fs.readdirSync(dirpath)
-.filter(function (filename) {
-	return filename[0] !== '.'
-})
-.map(function (filename) {
-	return fs.readFileSync(path.join(dirpath, filename)).toString();
-});
+	.filter(function (filename) {
+		return filename[0] !== '.'
+	})
+	.map(function (filename) {
+		return fs.readFileSync(path.join(dirpath, filename)).toString();
+	});
 
-function exactlyOneIsTrue (boolA, boolB) {
+function exactlyOneIsTrue(boolA, boolB) {
 	var onlyOne = true;
 	if (boolA && boolB) {
 		onlyOne = false;
@@ -30,7 +30,7 @@ function exactlyOneIsTrue (boolA, boolB) {
 	return onlyOne;
 }
 
-function getCall (spy, n) {
+function getCall(spy, n) {
 	return spy.__spy.calls[n] || [];
 }
 
@@ -38,7 +38,7 @@ function resetCalls(spy) {
 	spy.__spy.calls = [];
 }
 
-describe('exercise one (involving poem one)', function () {
+xdescribe('exercise one (involving poem one)', function () {
 
 	beforeEach(function () {
 		resetCalls(blue);
@@ -53,7 +53,7 @@ describe('exercise one (involving poem one)', function () {
 
 	describe('problemA', function () {
 
-		xit('logs the first stanza', function (done) {
+		it('logs the first stanza', function (done) {
 			exercise.problemA();
 			setTimeout(function () {
 				expect(blue).to.have.been.called.with(stanzas[0]);
@@ -63,9 +63,9 @@ describe('exercise one (involving poem one)', function () {
 
 	});
 
-	describe('problemB', function () {
+	xdescribe('problemB', function () {
 
-		xit('logs the second and third stanzas in any order', function (done) {
+		it('logs the second and third stanzas in any order', function (done) {
 			exercise.problemB();
 			setTimeout(function () {
 				expect(blue).to.have.been.called.with(stanzas[1]);
@@ -76,9 +76,9 @@ describe('exercise one (involving poem one)', function () {
 
 	});
 
-	describe('problemC', function () {
+	xdescribe('problemC', function () {
 
-		xit('logs the second THEN the third stanza', function (done) {
+		it('logs the second THEN the third stanza', function (done) {
 			exercise.problemC();
 			setTimeout(function () {
 				var firstCallArgs = blueCalls[0];
@@ -91,9 +91,9 @@ describe('exercise one (involving poem one)', function () {
 
 	});
 
-	describe('problemD', function () {
+	xdescribe('problemD', function () {
 
-		xit('logs the fourth stanza or an error if one occurs', function (done) {
+		it('logs the fourth stanza or an error if one occurs', function (done) {
 			exercise.problemD();
 			setTimeout(function () {
 				var blueCalledWithStanza = (getCall(blue, 0)[0] == stanzas[3]);
@@ -106,9 +106,9 @@ describe('exercise one (involving poem one)', function () {
 
 	});
 
-	describe('problemE', function () {
+	xdescribe('problemE', function () {
 
-		xit('logs the third THEN the fourth stanza; if an error occurs only logs the error and does not continue reading (if there is a file still left to read)', function (done) {
+		it('logs the third THEN the fourth stanza; if an error occurs only logs the error and does not continue reading (if there is a file still left to read)', function (done) {
 			exercise.problemE();
 			setTimeout(function () {
 				var bothSucceeded = (blueCalls.length === 2);
@@ -134,7 +134,7 @@ describe('exercise one (involving poem one)', function () {
 
 	});
 
-	describe('problemF', function () {
+	xdescribe('problemF', function () {
 
 
 		var originalLog = console.log;
@@ -151,7 +151,7 @@ describe('exercise one (involving poem one)', function () {
 			console.log.calls = [];
 		});
 
-		xit('logs the third THEN the fourth stanza; if an error occrus only logs the error and does not continue reading (if there is a file still left to read); always finishes by logging some done message', function (done) {
+		it('logs the third THEN the fourth stanza; if an error occrus only logs the error and does not continue reading (if there is a file still left to read); always finishes by logging some done message', function (done) {
 			exercise.problemF();
 			setTimeout(function () {
 				var loggedDoneCalls = console.log.calls.filter(function (call) {
